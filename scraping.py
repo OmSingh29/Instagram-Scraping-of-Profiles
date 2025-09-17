@@ -81,6 +81,11 @@ def scrape_instagram(username: str, password: str, status_callback=print):
 
         # ## Step 1: Navigate to Profile ##
         status_callback("🔎 Navigating to profile page...")
+        sleep(4)
+        profile_page_ss = screenshots_dir / "profile_page.png"
+        driver.save_screenshot(str(profile_page_ss))
+        screenshot_files.append(profile_page_ss)
+        return [profile_page_ss]
         try:
             profile_link = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@alt, 'profile picture')]/ancestor::a[1]")))
         except TimeoutException:
