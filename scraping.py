@@ -214,6 +214,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
 
     except Exception as e:
         status_callback(f"❌ An error occurred: {e}")
+        sleep(5)
     finally:
         output_file = Path(f"{platform}_data.json")
         with open(output_file, 'w', encoding='utf-8') as f:
