@@ -1,0 +1,2 @@
+selenium==4.33.0
+streamlit==1.45.1
