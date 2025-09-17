@@ -63,6 +63,8 @@ def scrape_instagram(username: str, password: str, status_callback=print):
         driver.get(url + login_url)
         status_callback("URL is opened")
 
+        sleep(5)
+
         homepic=screenshots_dir / "homepic.png"
         driver.save_screenshot(str(homepic))
         screenshot_files.append(homepic)
