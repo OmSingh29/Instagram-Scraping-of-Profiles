@@ -64,7 +64,8 @@ def scrape_instagram(username: str, password: str, status_callback=print):
         status_callback("URL is opened")
         try:
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, username_field))).send_keys(username)
-            sleep(1)
+            status_callback('Username sent')
+            sleep(3)
             pic=screenshots_dir / "username sent.png"
             driver.save_screenshot(str(pic))
             screenshot_files.append(pic)
@@ -81,6 +82,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
             return screenshot_files
         except Exception as e:
             status_callback("Error occurred: {e}")
+            sleep(3)
 
         status_callback("Waiting for login to complete...")
         sleep(6)
