@@ -49,28 +49,28 @@ def scrape_instagram(username: str, password: str, status_callback=print):
     status_callback("Browser initialised")
 
     try:
-        # --- Login Logic ---
-        if cookie_file.exists():
-            status_callback("Cookie file exists")
-            driver.get(url)
-            for cookie in pickle.load(open(cookie_file, "rb")):
-                driver.add_cookie(cookie)
-            driver.refresh()
-            status_callback("✅ Logged in using saved cookies")
-        else:
-            status_callback("No cookies found")
-            driver.get(url + login_url)
-            status_callback("URL is opened")
-            try:
-                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, username_field))).send_keys(username)
-                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, password_field))).send_keys(password)
-                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, login_button_xpath))).click()
-            except Exception as e:
-                status_callback("Error occurred: {e}")
-            status_callback("Waiting for login to complete...")
-            sleep(6)
-            pickle.dump(driver.get_cookies(), open(cookie_file, "wb"))
-            status_callback("✅ Logged in and cookies saved")
+    #     # --- Login Logic ---
+    #     if cookie_file.exists():
+    #         status_callback("Cookie file exists")
+    #         driver.get(url)
+    #         for cookie in pickle.load(open(cookie_file, "rb")):
+    #             driver.add_cookie(cookie)
+    #         driver.refresh()
+    #         status_callback("✅ Logged in using saved cookies")
+    #     else:
+        status_callback("No cookies found")
+        driver.get(url + login_url)
+        status_callback("URL is opened")
+        try:
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, username_field))).send_keys(username)
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, password_field))).send_keys(password)
+            WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, login_button_xpath))).click()
+        except Exception as e:
+            status_callback("Error occurred: {e}")
+        status_callback("Waiting for login to complete...")
+        sleep(6)
+        pickle.dump(driver.get_cookies(), open(cookie_file, "wb"))
+        status_callback("✅ Logged in and cookies saved")
 
         status_callback("Handle pop-ups")
 
