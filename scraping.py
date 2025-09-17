@@ -27,7 +27,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
     password_field = 'password'
     login_button_xpath = '//*[@id="loginForm"]/div/div[3]'
 
-    profile_link_xpath = "//span[text()='Profile']/ancestor::a"
+    profile_link_xpath = "//img[contains(@alt, 'profile picture')]/ancestor::a[1]"
     post_elements_xpath = "//main//div/div/a"
 
     screenshots_dir = Path(f"{platform}_screenshots")
