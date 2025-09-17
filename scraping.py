@@ -45,6 +45,8 @@ def scrape_instagram(username: str, password: str, status_callback=print):
     #driver = webdriver.Chrome(options=options)
     driver = webdriver.Chrome(service=Service(executable_path="/usr/bin/chromedriver"), options=options)
 
+    status_callback("Browser initialised")
+
     try:
         # --- Login Logic ---
         if cookie_file.exists():
@@ -216,5 +218,6 @@ def scrape_instagram(username: str, password: str, status_callback=print):
             json.dump(scraped_data, f, ensure_ascii=False, indent=4)
         status_callback(f"💾 Data saved to {output_file}")
         driver.quit()
+
 
     return screenshot_files
