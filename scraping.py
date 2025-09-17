@@ -51,6 +51,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
     try:
         # --- Login Logic ---
         if cookie_file.exists():
+            status_callback("Cookie file exists")
             driver.get(url)
             for cookie in pickle.load(open(cookie_file, "rb")):
                 driver.add_cookie(cookie)
