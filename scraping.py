@@ -23,6 +23,13 @@ def scrape_instagram(username: str, password: str, status_callback=print):
     url = f'https://www.{platform}.com/'
     cookie_file = Path(f"{platform}_cookies.pkl")
 
+    if st.button("Delete Cookies"):
+        if cookies_file.exists():
+            cookies_file.unlink()
+            st.success("Cookies file deleted ✅")
+        else:
+            st.warning("No cookies file found.")
+
     login_url = 'accounts/login/'
     username_field = 'username'
     password_field = 'password'
