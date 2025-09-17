@@ -13,6 +13,7 @@ import pickle
 import json
 #status_callback("")
 
+platform = 'instagram'
 cookie_file = Path(f"{platform}_cookies.pkl")
 
 
@@ -21,7 +22,6 @@ def scrape_instagram(username: str, password: str, status_callback=print):
     screenshot_files = []
     scraped_data = {}
 
-    platform = 'instagram'
     url = f'https://www.{platform}.com/'
 
     login_url = 'accounts/login/'
