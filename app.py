@@ -23,8 +23,8 @@ with st.form("credentials_form"):
     submitted = st.form_submit_button("Start Scraping")
 
 if st.button("Delete Cookies"):
-    if cookies_file.exists():
-        cookies_file.unlink()
+    if cookie_file.exists():
+        cookie_file.unlink()
         st.success("Cookies file deleted ✅")
     else:
         st.warning("No cookies file found.")
