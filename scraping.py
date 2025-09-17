@@ -11,6 +11,7 @@ from pathlib import Path
 from time import sleep
 import pickle
 import json
+#status_callback("")
 
 
 def scrape_instagram(username: str, password: str, status_callback=print):
@@ -56,6 +57,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
             driver.refresh()
             status_callback("✅ Logged in using saved cookies")
         else:
+            status_callback("No cookies found")
             driver.get(url + login_url)
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, username_field))).send_keys(username)
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, password_field))).send_keys(password)
