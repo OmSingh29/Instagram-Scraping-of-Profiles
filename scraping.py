@@ -15,6 +15,7 @@ import json
 
 
 def scrape_instagram(username: str, password: str, status_callback=print):
+    status_callback(f"Username is {username} and password is {password}")
     screenshot_files = []
     scraped_data = {}
 
@@ -63,10 +64,24 @@ def scrape_instagram(username: str, password: str, status_callback=print):
         status_callback("URL is opened")
         try:
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, username_field))).send_keys(username)
+            sleep(1)
+            pic=screenshots_dir / "username sent.png"
+            driver.save_screenshot(str(pic))
+            screenshot_files.append(pic)
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, password_field))).send_keys(password)
+            sleep(1)
+            pic=screenshots_dir / "password sent.png"
+            driver.save_screenshot(str(pic))
+            screenshot_files.append(pic)
             WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, login_button_xpath))).click()
+            sleep(1)
+            pic=screenshots_dir / "clicking sent.png"
+            driver.save_screenshot(str(pic))
+            screenshot_files.append(pic)
+            return screenshot_files
         except Exception as e:
             status_callback("Error occurred: {e}")
+
         status_callback("Waiting for login to complete...")
         sleep(6)
         pickle.dump(driver.get_cookies(), open(cookie_file, "wb"))
