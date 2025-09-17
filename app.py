@@ -2,7 +2,7 @@
 
 import streamlit as st
 from pathlib import Path
-from scraping import scrape_instagram # Import your main function
+from scraping import scrape_instagram,cookie_file # Import your main function
 
 # --- Page Configuration ---
 st.set_page_config(
@@ -21,6 +21,13 @@ with st.form("credentials_form"):
     username = st.text_input("Username or Email")
     password = st.text_input("Password", type="password")
     submitted = st.form_submit_button("Start Scraping")
+
+if st.button("Delete Cookies"):
+    if cookies_file.exists():
+        cookies_file.unlink()
+        st.success("Cookies file deleted ✅")
+    else:
+        st.warning("No cookies file found.")
 
 # --- Scraper Execution ---
 if submitted:

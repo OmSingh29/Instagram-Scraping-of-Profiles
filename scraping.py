@@ -13,6 +13,8 @@ import pickle
 import json
 #status_callback("")
 
+cookie_file = Path(f"{platform}_cookies.pkl")
+
 
 def scrape_instagram(username: str, password: str, status_callback=print):
     status_callback(f"Username is {username} and password is {password}")
@@ -21,14 +23,6 @@ def scrape_instagram(username: str, password: str, status_callback=print):
 
     platform = 'instagram'
     url = f'https://www.{platform}.com/'
-    cookie_file = Path(f"{platform}_cookies.pkl")
-
-    if st.button("Delete Cookies"):
-        if cookies_file.exists():
-            cookies_file.unlink()
-            st.success("Cookies file deleted ✅")
-        else:
-            st.warning("No cookies file found.")
 
     login_url = 'accounts/login/'
     username_field = 'username'
