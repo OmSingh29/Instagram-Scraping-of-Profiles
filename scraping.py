@@ -43,8 +43,8 @@ def scrape_instagram(username: str, password: str, status_callback=print):
 
     status_callback("Initialising browser")
     
-    #driver = webdriver.Chrome(options=options)
-    driver = webdriver.Chrome(service=Service(executable_path="/usr/bin/chromedriver"), options=options)
+    driver = webdriver.Chrome(options=options)
+    #driver = webdriver.Chrome(service=Service(executable_path="/usr/bin/chromedriver"), options=options)
 
     status_callback("Browser initialised")
 
@@ -82,11 +82,17 @@ def scrape_instagram(username: str, password: str, status_callback=print):
         # ## Step 1: Navigate to Profile ##
         status_callback("🔎 Navigating to profile page...")
         try:
-            profile_link = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, profile_link_xpath)))
-            profile_link.click()
-        except Exception as e:
-            status_callback(f"Couldn't find profile_link_xpath: {e}")
-            sleep(2)
+            profile_link = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@alt, 'profile picture')]/ancestor::a[1]")))
+        except TimeoutException:
+            status_callback("Fallback: Trying mobile layout selector")
+            # Option 2: Mobile nav bar (bottom navigation bar in headless/mobile)
+            try:
+                profile_link = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/accounts/edit/')]/span | //a[contains(@href, '/"+username+"/')]")))
+            except TimeoutException:
+                status_callback("Fallback: Trying role=link selector")
+                # Option 3: Any span/link with role=link and profile alt
+                profile_link = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[@role='link']//img[contains(@alt, 'profile picture')]")))
+        profile_link.click()
         profile_id = driver.current_url.split('/')[-2]
         scraped_data['profile_id'] = profile_id
         status_callback(f"✅ Profile: {profile_id}")
