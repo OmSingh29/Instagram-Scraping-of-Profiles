@@ -81,9 +81,12 @@ def scrape_instagram(username: str, password: str, status_callback=print):
 
         # ## Step 1: Navigate to Profile ##
         status_callback("🔎 Navigating to profile page...")
-        profile_link = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, profile_link_xpath)))
-        profile_link.click()
-        sleep(2)
+        try:
+            profile_link = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, profile_link_xpath)))
+            profile_link.click()
+        except Exception as e:
+            status_callback(f"Couldn't find profile_link_xpath: {e}")
+            sleep(2)
         profile_id = driver.current_url.split('/')[-2]
         scraped_data['profile_id'] = profile_id
         status_callback(f"✅ Profile: {profile_id}")
