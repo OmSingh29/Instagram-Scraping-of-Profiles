@@ -73,10 +73,6 @@ streamlit run app.py
 
 ---
 
-## 📸 Screenshots
-### Streamlit App UI
-![App Screenshot](https://via.placeholder.com/800x400.png?text=App+UI+Preview)
-
 ---
 
 ## ❓ Troubleshooting
