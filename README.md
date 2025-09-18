@@ -18,3 +18,79 @@ It logs into Instagram (via cookies or credentials), navigates through the profi
 ---
 
 ## 📂 Project Structure
+```
+instagram-scraping-of-profiles/
+│── app.py              # Streamlit app entry point
+│── scraping.py         # Core scraper logic (Selenium + undetected-chromedriver)
+│── requirements.txt    # Dependencies
+│── README.md           # Documentation
+│── instagram_cookies.pkl   # (Generated) Saved cookies for login persistence
+│── instagram_screenshots/  # (Generated) Screenshots saved here
+│── instagram_data.json     # (Generated) Profile & posts metadata
+```
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
+```
+git clone https://github.com/your-username/instagram-scraping-of-profiles.git
+```
+```
+cd instagram-scraping-of-profiles
+```
+
+### 2. Install dependencies
+```
+pip install -r requirements.txt
+```
+
+### 3. Run the Streamlit app
+```
+streamlit run app.py
+```
+
+---
+
+## 🛠️ Requirements
+- Python 3.11+  
+- Google Chrome or Chromium (installed on your system version 140+) 
+- ChromeDriver (handled automatically by **undetected-chromedriver**)  
+
+---
+
+## 🔑 Usage
+1. Run the app with `streamlit run app.py`.  
+2. Enter your **Instagram username & password**.  
+3. The scraper will:
+   - Use cookies if available (faster login).  
+   - Otherwise, log in with credentials and save cookies.  
+4. Screenshots and scraped data will be saved locally:
+   - `instagram_screenshots/` – Screenshots of profile, followers, posts, etc.  
+   - `instagram_data.json` – Extracted metadata (posts, followers, following).  
+5. View and download screenshots directly in the Streamlit UI.  
+
+---
+
+## 📸 Screenshots
+### Streamlit App UI
+![App Screenshot](https://via.placeholder.com/800x400.png?text=App+UI+Preview)
+
+---
+
+## ❓ Troubleshooting
+- **Blocked Login / Challenge Required**  
+  Instagram may detect automated logins. Try deleting cookies (via the "Delete Cookies" button) and logging in again.  
+
+---
+
+## ⚠️ Disclaimer
+This project is for **educational purposes only**. 
+Scraping Instagram or automating logins may violate Instagram’s [Terms of Service](https://help.instagram.com/581066165581870).  
+Use responsibly and at your own risk.  
+
+---
+
+## 📜 License
+MIT License © 2025
