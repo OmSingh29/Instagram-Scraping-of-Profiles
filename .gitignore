@@ -3,3 +3,4 @@ instagram_data.json
 __pycache__
 instagram_screenshots
 your_activity_scroll_screenshots
+.streamlit/secrets.toml

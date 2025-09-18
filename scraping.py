@@ -44,8 +44,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
 
     status_callback("Initialising browser")
     
-    driver = webdriver.Chrome(options=options,version_main=120)
-    #driver = webdriver.Chrome(service=Service(executable_path="/usr/bin/chromedriver"), options=options)
+    driver = webdriver.Chrome(options=options)
 
     status_callback("Browser initialised")
 
@@ -57,42 +56,16 @@ def scrape_instagram(username: str, password: str, status_callback=print):
             for cookie in pickle.load(open(cookie_file, "rb")):
                 driver.add_cookie(cookie)
             driver.refresh()
-            sleep(2)
-            homepic=screenshots_dir / "homepic.png"
-            driver.save_screenshot(str(homepic))
-            screenshot_files.append(homepic)
             status_callback("✅ Logged in using saved cookies")
         else:
             status_callback("No cookies found")
             driver.get(url + login_url)
             status_callback("URL is opened")
-
             sleep(2)
 
-            homepic=screenshots_dir / "homepic.png"
-            driver.save_screenshot(str(homepic))
-            screenshot_files.append(homepic)
-            try:
-                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, username_field))).send_keys(username)
-                status_callback('Username sent')
-                sleep(3)
-                pic=screenshots_dir / "username sent.png"
-                driver.save_screenshot(str(pic))
-                screenshot_files.append(pic)
-                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, password_field))).send_keys(password)
-                sleep(1)
-                pic=screenshots_dir / "password sent.png"
-                driver.save_screenshot(str(pic))
-                screenshot_files.append(pic)
-                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, login_button_xpath))).click()
-                sleep(1)
-                pic=screenshots_dir / "clicking sent.png"
-                driver.save_screenshot(str(pic))
-                screenshot_files.append(pic)
-            except Exception as e:
-                status_callback("Error occurred: {e}")
-                sleep(3)
-                return screenshot_files
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, username_field))).send_keys(username)
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, password_field))).send_keys(password)
+            WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, login_button_xpath))).click()
 
             status_callback("Waiting for login to complete...")
             sleep(6)
