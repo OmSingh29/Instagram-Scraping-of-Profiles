@@ -36,15 +36,11 @@ def scrape_instagram(username: str, password: str, status_callback=print):
     screenshots_dir.mkdir(exist_ok=True)
 
     options = Options()
-    options.add_argument("--headless=new") 
     options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    options.add_experimental_option('useAutomationExtension', False)
+    options.add_argument("--headless=new")  # required on Streamlit/servers
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("window-size=1280,1024")
-    options.add_argument('--proxy-server=http://vsnykqya:7kbgeyndkx87@142.111.48.253:7030')
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+
 
     status_callback("Initialising browser")
     
