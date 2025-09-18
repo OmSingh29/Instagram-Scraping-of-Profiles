@@ -44,7 +44,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
 
     status_callback("Initialising browser")
     
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(options=options,version_main=120)
     #driver = webdriver.Chrome(service=Service(executable_path="/usr/bin/chromedriver"), options=options)
 
     status_callback("Browser initialised")
