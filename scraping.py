@@ -1,4 +1,4 @@
-from selenium import webdriver
+import undetected_chromedriver as webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -48,8 +48,8 @@ def scrape_instagram(username: str, password: str, status_callback=print):
 
     status_callback("Initialising browser")
     
-    #driver = webdriver.Chrome(options=options)
-    driver = webdriver.Chrome(service=Service(executable_path="/usr/bin/chromedriver"), options=options)
+    driver = webdriver.Chrome(options=options)
+    #driver = webdriver.Chrome(service=Service(executable_path="/usr/bin/chromedriver"), options=options)
 
     status_callback("Browser initialised")
 
@@ -61,7 +61,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
             for cookie in pickle.load(open(cookie_file, "rb")):
                 driver.add_cookie(cookie)
             driver.refresh()
-            sleep(5)
+            sleep(2)
             homepic=screenshots_dir / "homepic.png"
             driver.save_screenshot(str(homepic))
             screenshot_files.append(homepic)
@@ -71,7 +71,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
             driver.get(url + login_url)
             status_callback("URL is opened")
 
-            sleep(5)
+            sleep(2)
 
             homepic=screenshots_dir / "homepic.png"
             driver.save_screenshot(str(homepic))
@@ -116,7 +116,6 @@ def scrape_instagram(username: str, password: str, status_callback=print):
         profile_page_ss = screenshots_dir / "profile_page.png"
         driver.save_screenshot(str(profile_page_ss))
         screenshot_files.append(profile_page_ss)
-        return [profile_page_ss]
         try:
             profile_link = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//img[contains(@alt, 'profile picture')]/ancestor::a[1]")))
         except TimeoutException:
