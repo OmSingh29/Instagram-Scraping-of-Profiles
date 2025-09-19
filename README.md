@@ -71,7 +71,7 @@ streamlit run app.py
 ---
 
 ## 🛠️ Requirements
-- Python 3.11+  
+- Python 3.11
 - Google Chrome or Chromium (installed on your system version 140+) 
 - ChromeDriver (handled automatically by **undetected-chromedriver**)  
 
