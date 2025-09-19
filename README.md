@@ -52,7 +52,7 @@ conda activate scraping
 Or
 
 ```
-python -m venv scraping
+py -3.11 -m venv scraping
 ```
 ```
 scraping\Scripts\activate
