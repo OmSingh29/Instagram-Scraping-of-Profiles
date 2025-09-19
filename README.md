@@ -41,6 +41,14 @@ git clone https://github.com/your-username/instagram-scraping-of-profiles.git
 cd instagram-scraping-of-profiles
 ```
 
+### 2. Create Virtual Environment (Recommended)
+```
+conda create -n scraping python=3.11
+```
+```
+conda activate scraping
+```
+
 ### 2. Install dependencies
 ```
 pip install -r requirements.txt
