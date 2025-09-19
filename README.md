@@ -49,6 +49,15 @@ conda create -n scraping python=3.11
 conda activate scraping
 ```
 
+Or
+
+```
+python -m venv scraping
+```
+```
+scraping\Scripts\activate
+```
+
 ### 2. Install dependencies
 ```
 pip install -r requirements.txt
