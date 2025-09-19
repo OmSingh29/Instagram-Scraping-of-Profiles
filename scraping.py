@@ -17,7 +17,7 @@ platform = 'instagram'
 cookie_file = Path(f"{platform}_cookies.pkl")
 
 
-def scrape_instagram(username: str, password: str, status_callback=print):
+def scrape_instagram(username: str, password: str, status_callback,output_dir):
     status_callback(f"Username is {username} and password is {password}")
     screenshot_files = []
     scraped_data = {}
@@ -32,7 +32,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
     profile_link_xpath = "//img[contains(@alt, 'profile picture')]/ancestor::a[1]"
     post_elements_xpath = "//main//div/div/a"
 
-    screenshots_dir = Path(f"{platform}_screenshots")
+    screenshots_dir = output_dir
     screenshots_dir.mkdir(exist_ok=True)
 
     options = Options()
@@ -40,7 +40,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
     options.add_argument("--headless=new")  # required on Streamlit/servers
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36")
 
     status_callback("Initialising browser")
     
@@ -179,7 +179,7 @@ def scrape_instagram(username: str, password: str, status_callback=print):
             pass
 
         # ## Step 4: Your Activity ##
-        activity_screenshots_dir = Path("your_activity_scroll_screenshots")
+        activity_screenshots_dir = output_dir / "your_activity"
         activity_screenshots_dir.mkdir(exist_ok=True)
         driver.get(url + "your_activity/")
         your_activity_header_xpath = "//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'your activity']"
